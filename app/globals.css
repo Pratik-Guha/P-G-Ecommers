@@ -2,26 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.nav{
+    @apply py-3 px-12 border-b border-blue-500 flex justify-between items-center font-semibold 
+    sticky top-0 left-0 right-0 
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.button{
+    @apply bg-blue-500 text-white py-2 px-5 rounded-full hover:bg-blue-600
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.login{
+    @apply w-full flex justify-center items-center p-24 min-h-screen
 }
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.loginform{
+    @apply flex flex-col gap-3 bg-gray-200 dark:bg-gray-400 md:p-10 p-5 rounded-xl  
+}
+.sidebar{
+    @apply bg-gray-400 border-r px-5 py-3 h-screen overflow-hidden 
+    w-[220px] flex flex-col items-center justify-between gap-7 sticky top-0 z-50
+}
+.form{
+   @apply bg-gray-400 rounded-xl p-5 font-semibold text-xl w-full md:w-[400px] flex flex-col gap-3
 }
