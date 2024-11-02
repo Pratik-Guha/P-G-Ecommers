@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 .nav{
-    @apply py-3 px-12 border-b border-blue-500 flex justify-between items-center font-semibold 
-    sticky top-0 left-0 right-0 
+    @apply md:py-4 md:px-12 py-3 px-7 border-b border-blue-500 flex justify-between items-center font-semibold 
+    sticky top-0 left-0 right-0 bg-gray-400 dark:bg-black z-50 
 }
 .button{
     @apply bg-blue-500 text-white py-2 px-5 rounded-full hover:bg-blue-600
+}
+.hmbutton{
+    @apply bg-blue-500 text-white py-2 px-4 md:px-5 rounded-xl hover:bg-blue-600 border-2 border-white shadow-xl
 }
 .login{
     @apply w-full flex justify-center items-center p-24 min-h-screen
@@ -22,3 +25,25 @@
 .form{
    @apply bg-gray-400 rounded-xl p-5 font-semibold text-xl w-full md:w-[400px] flex flex-col gap-3
 }
+.footer{
+    @apply bg-gray-900 text-white  border-t-2 border-t-blue-500 p-5 md:p-10 flex-col flex w-full gap-3
+}
+.featured{
+    padding-left:12px;
+    padding-right:12px;
+    padding-top:4px;
+    padding-bottom:4px;
+    font-size: 12px;
+    color: #fff;
+    margin-left: 8px;
+    background: linear-gradient(90deg, rgba(0, 255, 235, 1) 0%, rgba(7, 58, 187, 1) 100%);
+}
+.sliders{
+    @apply  bg-slate-200 dark:bg-slate-300 dark:opacity-90 p-5 md:px-24 md:py-20 flex 
+    flex-col-reverse md:flex-row gap-4 w-full
+}
+.sliders2{
+    @apply  bg-slate-200 dark:bg-slate-300 dark:opacity-90 sm:p-6 p-3  flex flex-col-reverse 
+    md:flex-row gap-6 w-full rounded-lg  h-full
+}
+

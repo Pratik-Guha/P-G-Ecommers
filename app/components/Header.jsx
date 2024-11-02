@@ -1,3 +1,4 @@
+import { Heart, Search, ShoppingCart, UserCircle } from "lucide-react"
 import Link from "next/link"
 
 
@@ -8,7 +9,7 @@ export default function Header() {
             link:"/"
         },
         {
-            name:"About Us",
+            name:"About",
             link:"/about-us"
         },
         {
@@ -18,21 +19,46 @@ export default function Header() {
     ]
   return (
     <nav className="nav">
-      <img className="h-10" src={"logo.png"} alt="logo" />
-      <div className="flex gap-4 items-center">
+      <img className="md:h-10 h-7" src={"/logo.png"} alt="logo" />
+      
+      <div className="hidden md:flex gap-3 items-center">
         {
           menuList.map(item=>{
             return (
               <Link href={item.link} key={item.name}>
-                <button>{item.name}</button>
+                <button className="text-base md:text-lg  hover:opacity-60">
+                  {item.name}
+                </button>
               </Link>
             )
           })
         }
       </div>
-      <Link href={"/login"}>
+      <div className="flex gap-2 items-center">
+        <Link href={"/search"}>
+        <button title="search products" className="h-5 w-5 flex justify-center items-center rounded-full hover:opacity-60">
+          <Search size={20}/>
+        </button>
+        </Link>
+        <Link href={"/favorites"}>
+        <button title="favorites" className="h-5 w-5 flex justify-center items-center rounded-full hover:opacity-60">
+          <Heart  size={20}/>
+        </button>
+        </Link>
+        <Link href={"/cart"}>
+        <button title="my cart" className="h-5 w-5 flex justify-center items-center rounded-full hover:opacity-60">
+          <ShoppingCart size={20}/>
+        </button>
+        </Link>
+        <Link href={"/account"}>
+        <button title="my account" className="h-5 w-5 flex justify-center items-center rounded-full hover:opacity-60">
+          <UserCircle size={20}/>
+        </button>
+        </Link>
+      </div>
+      {/* <Link href={"/login"}>
       <button className="button">Login</button>
-      </Link>
+      </Link> */}
     </nav>
   )
 }

@@ -1,7 +1,5 @@
 import { NextUIProvider } from "@nextui-org/react";
-import Header from "./components/Header";
 import "./globals.css";
-import ThemeToggleButton from "@/app/toggle";
 import { Toaster } from "react-hot-toast";
 
 

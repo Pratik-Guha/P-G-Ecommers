@@ -127,6 +127,23 @@ export default function BasicDetails({data,handleData}) {
                     }}
                 />
             </div>
+            <div className="flex flex-col gap-1">
+                <label htmlFor="product-is-feature-product" className=" text-sm  ">
+                   Is Featured Product 
+                    </label>
+                <select 
+                    type="number"
+                    id="product-is-feature-product" name="product-is-feature-product"
+                    className="border border-gray-400 px-4 py-2 rounded-lg w-full outline-none"
+                    value={data?.isFeatured ? "yes":"no"}
+                    onChange={(e)=>{
+                    handleData("isFeatured",e.target.value==="yes"? true:false)
+                    }}
+                >
+                    <option value={"no"}>No</option>
+                    <option value={"yes"}>Yes</option>
+                </select>
+            </div>
         </section>
     )
 }

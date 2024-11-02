@@ -4,7 +4,7 @@ import ThemeToggleButton from "@/app/toggle"
 import { auth } from "@/lib/firebase"
 import { Button } from "@nextui-org/react"
 import { signOut } from "firebase/auth"
-import { Box, Dices, icons, Layers3, LayoutDashboard, LogOut, Shapes, ShieldCheck, ShoppingBasket, ShoppingCart, Star, UserRound } from "lucide-react"
+import { Box, Dices, icons, Layers3, LayoutDashboard, LogOut, Shapes, ShieldCheck, ShoppingCart, Star, UserRound } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
@@ -59,7 +59,9 @@ export default function Sidebar() {
     ]
     return (
         <section className="sidebar">
+            <Link href="/">
             <img src="logo.png" className="h-10"/>
+            </Link>
             <ul className="flex-1 flex flex-col gap-4 h-full overflow-y-auto">
                 {
                     menuList?.map((item,key)=>{
