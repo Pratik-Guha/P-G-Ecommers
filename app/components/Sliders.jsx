@@ -1,9 +1,12 @@
 "use client"
+import AuthContextProvider from "@/contexts/AuthContext";
 import { Button } from "@nextui-org/react";
 import { Award, Heart } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 import Slider from "react-slick";
+import FavoriteButton from "./FavoriteButton";
+import AddToCartButton from "./AddToCartButton";
 
 export default function FeaturedProductSlider({featuredProducts}) {
   var settings = {
@@ -47,15 +50,15 @@ export default function FeaturedProductSlider({featuredProducts}) {
                           {product?.shortDescription}
                         </h1>
                       </div>
+                      <AuthContextProvider>
                         <div className="flex items-center gap-4">
+                          <Link href={`/checkout?type=buynow&producctId=${product?.id}`}>
                           <button className="hmbutton">BUY NOW</button>
-                          <button className="py-2 px-5 shadow-xl rounded-xl border-2 border-blue-500 text-blue-500 bg-blue-100 hover:bg-blue-200">
-                              Add To Cart
-                          </button>
-                          <button className="py-3 px-3 shadow-xl text-pink-400 rounded-full border bg-white  hover:text-pink-600">
-                            <Heart />
-                          </button>
+                          </Link>
+                          <AddToCartButton productId={product?.id} type={"large"}/>
+                            <FavoriteButton productId={product?.id} />
                         </div>
+                      </AuthContextProvider>
                     </div>
                     <div className="justify-center items-center flex">
                         <Link href={`/products/${product?.id}`} target="_blank">
