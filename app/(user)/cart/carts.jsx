@@ -44,7 +44,7 @@ export default function Carts(){
                 }
             </div>
             <div>
-                <Link href="/checkout?type=cart">
+                <Link href="/checkout?type=cart" target="_blank">
                 <button className="hmbutton">Checkout</button>
                 </Link>
             </div>

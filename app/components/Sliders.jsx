@@ -52,7 +52,7 @@ export default function FeaturedProductSlider({featuredProducts}) {
                       </div>
                       <AuthContextProvider>
                         <div className="flex items-center gap-4">
-                          <Link href={`/checkout?type=buynow&producctId=${product?.id}`}>
+                          <Link href={`/checkout?type=buynow&productId=${product?.id}`} target="_blank">
                           <button className="hmbutton">BUY NOW</button>
                           </Link>
                           <AddToCartButton productId={product?.id} type={"large"}/>

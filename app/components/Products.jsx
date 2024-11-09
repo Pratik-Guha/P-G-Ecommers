@@ -70,7 +70,7 @@ export function ProductCart({ product }) {
 
       <div className="flex justify-between items-center gap-4 w-full">
         <div className="w-full">
-        <Link href={`/checkout?type=buynow&producctId=${product?.id}`}>
+        <Link href={`/checkout?type=buynow&productId=${product?.id}`} target="_blank">
           <button className="hmbutton">BUY NOW</button>
         </Link>
         </div>
