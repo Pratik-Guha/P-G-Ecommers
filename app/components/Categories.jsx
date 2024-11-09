@@ -11,10 +11,10 @@ export default function Category({categories}) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
-    // autoplay: true,
-    // speed: 1000,
-    // autoplaySpeed: 3000,
-    // cssEase: "linear",
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024, // Adjust for tablets

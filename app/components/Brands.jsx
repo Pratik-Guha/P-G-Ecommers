@@ -10,10 +10,10 @@ export default function Brand({brands}) {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 2,
-    // autoplay: true,
-    // speed: 1000,
-    // autoplaySpeed: 4000,
-    // cssEase: "linear",
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 4000,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024, // Adjust for tablets

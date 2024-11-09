@@ -15,10 +15,10 @@ export default function FeaturedProductSlider({featuredProducts}) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // autoplay: true,
-    // speed: 1000,
-    // autoplaySpeed: 3000,
-    // cssEase: "linear",
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
   };
   useEffect(() => {
     const dots = document.querySelectorAll(".slick-dots li button");
