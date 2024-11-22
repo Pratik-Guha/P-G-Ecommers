@@ -1,7 +1,8 @@
 "use client"
 
+import { useAuth } from "@/contexts/AuthContext"
+import { createCheckoutAndGetURL } from "@/lib/firestore/checkout/write"
 import { Button } from "@nextui-org/react"
-import confetti from "canvas-confetti"
 import { CheckSquare, CheckSquare2, Square } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -12,6 +13,7 @@ export default function Check({productList}){
     const [checkBox,setCheckBox]=useState(false)
     const [isLoading,setIsLoading]=useState(false)
     const [address,setAddress]=useState(null)
+    const {user}=useAuth()
     const router=useRouter()
     const totalPrice = productList?.reduce((prev, curr) => {
         return prev + curr?.quantity * curr?.product?.salePrice;
@@ -33,16 +35,23 @@ export default function Check({productList}){
                 throw new Error("Please fill all the fields")
             }
 
-            await new Promise(res=>setTimeout(res,2000))
+            if(!productList || productList?.length===0){
+                throw new Error("Please add some product to cart")
+            }
             //Todo
             if(paymentMethod=="prepaid"){
-                
+                const url=await createCheckoutAndGetURL({
+                    uid:user?.uid,
+                    products:productList,
+                    address:address
+                })
+                router.push(url)
             }else{
-                
+                throw new Error("Please select a payment method thre some error in Check.jsx")
             }
-            toast.success("Your order has been placed successfully")
-            confetti()
-            router.push("/account")
+            // toast.success("Your order has been placed successfully")
+            // confetti()
+            // router.push("/account")
         } catch (error) {
             toast.error(error?.message)
         }
@@ -141,8 +150,8 @@ export default function Check({productList}){
                 {
                     productList?.map(item=>{
                         return(
-                            <div className="flex gap-3 items-center">
-                                <img className="w-20 object-cover rounded-lg" src={item?.product?.featureImageURL} alt="" />
+                            <div key={item?.product?._id} className="flex gap-3 items-center">
+                                <img  className="w-20 object-cover rounded-lg" src={item?.product?.featureImageURL} alt="" />
                             <div className="flex-1 flex-col flex">
                                 <h1>{item?.product?.title}</h1>
                                 <h3 className="font-semibold text-xs">

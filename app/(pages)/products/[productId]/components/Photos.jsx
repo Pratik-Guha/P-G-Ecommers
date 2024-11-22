@@ -18,9 +18,9 @@ export default function Photos({imageList}) {
                 {
                     imageList?.map(item=>{
                         return (
-                            <div onClick={()=>{setSelectImage(item)}} 
+                            <div key={item} onClick={()=>{setSelectImage(item)}} 
                             className="cursor-pointer p-2  rounded-xl border">
-                                <img className="object-cover h-20" src={item} alt="" />
+                                <img className="object-cover h-20" key={item} src={item} alt="" />
                             </div>
                         )
                     })

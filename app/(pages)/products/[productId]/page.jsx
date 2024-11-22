@@ -14,7 +14,7 @@ export default async function Page({ params }) {
   return (
     <main className="p-5 md:p-10  gap-3">
       <section className="flex gap-3 flex-col md:flex-row">
-        <Photos imageList={[product?.featureImageURL,...(product?.imageList ?? [])]} />
+      <Photos key={product?.id} imageList={[product?.featureImageURL ?? "", ...(product?.imageList ?? [])]} />
         <Details product={product} />
       </section>
       <section>
