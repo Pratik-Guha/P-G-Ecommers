@@ -1,8 +1,9 @@
 "use client"
 
 import { useAuth } from "@/contexts/AuthContext"
-import { createCheckoutAndGetURL } from "@/lib/firestore/checkout/write"
+import { createCheckoutAndGetURL, createCheckoutCODAndGetURL } from "@/lib/firestore/checkout/write"
 import { Button } from "@nextui-org/react"
+import confetti from "canvas-confetti"
 import { CheckSquare, CheckSquare2, Square } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -47,11 +48,15 @@ export default function Check({productList}){
                 })
                 router.push(url)
             }else{
-                throw new Error("Please select a payment method thre some error in Check.jsx")
+                const checkoutId=await createCheckoutCODAndGetURL({
+                    uid:user?.uid,
+                    products:productList,
+                    address:address
+                })
+                router.push(`/checkout-cod?checkout_id=${checkoutId}`)
             }
-            // toast.success("Your order has been placed successfully")
-            // confetti()
-            // router.push("/account")
+            toast.success("Your order has been placed successfully")
+            confetti()
         } catch (error) {
             toast.error(error?.message)
         }

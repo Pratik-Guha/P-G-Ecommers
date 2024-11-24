@@ -1,6 +1,6 @@
 
 import { db } from "@/lib/firebase"
-import { collection, doc, getDoc, setDoc } from "firebase/firestore"
+import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore"
 
 export const createCheckoutAndGetURL=async({uid,products,address})=>{
     const checkoutId=doc(collection(db,`ids`)).id;
@@ -66,4 +66,43 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
             throw new Error("Check out session not created")
         }
     }
+}
+export const createCheckoutCODAndGetURL=async({uid,products,address})=>{
+    const checkoutId=`cod_${doc(collection(db,`ids`)).id}`;
+
+    const ref = doc(db, `users`, uid, `checkout_sessions_cod`, checkoutId);
+
+
+    const line_items=[]
+
+    products.forEach((item)=>{
+        line_items.push({
+            price_data:{
+                currency:"inr",
+                product_data:{
+                    name:item?.product?.title?? "",
+                    images:[item?.product?.featureImageURL]?? "",
+                    description:item?.product?.shortDescription ?? "",
+                    metadata:{
+                        productId:item?.id
+                    }
+                },
+                unit_amount:item?.product?.salePrice*100,
+            },
+            quantity:item?.quantity?? 1,
+        },)
+    })
+    await setDoc(ref,{
+        id:checkoutId,
+        line_items:line_items,
+        metadata:{
+            checkoutId:checkoutId,
+            uid:uid,
+            address:JSON.stringify(address),
+        },
+        createdAt:Timestamp.now(),
+    })
+
+    return checkoutId
+    
 }
