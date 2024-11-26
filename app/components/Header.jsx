@@ -3,6 +3,7 @@ import Link from "next/link"
 import LogoutButton from "./LogoutButton"
 import AuthContextProvider from "@/contexts/AuthContext"
 import HeaderClientButton from "./HeaderClientButton"
+import AdminButton from "./AdminButton"
 
 
 export default function Header() {
@@ -39,7 +40,11 @@ export default function Header() {
           })
         }
       </div>
+      
       <div className="flex gap-2 md:gap-4 items-center">
+        <AuthContextProvider>
+          <AdminButton/>
+        </AuthContextProvider>
         <Link href={"/search"}>
         <button title="search products" className="h-6 w-6 flex justify-center items-center rounded-full hover:opacity-60">
           <Search size={20}/>
