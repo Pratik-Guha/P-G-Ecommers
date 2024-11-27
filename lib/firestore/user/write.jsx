@@ -1,6 +1,18 @@
 import { db } from "@/lib/firebase"
-import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc, Timestamp } from "firebase/firestore"
+import { displayName } from "react-quill"
 
+
+export const createUser=async ({uid,displayName,photoURL})=>{
+    await setDoc(doc(db,`users/${uid}`) ,{
+        displayName:displayName,
+        photoURL:photoURL?? "",
+        timestampCreate:Timestamp.now(),
+    },
+    {
+        merge:true
+    })
+}
 export const updateFavorites=async ({uid,list})=>{
     await setDoc(doc(db,`users/${uid}`) ,
     {
