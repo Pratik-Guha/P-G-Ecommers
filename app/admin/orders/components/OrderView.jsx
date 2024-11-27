@@ -1,7 +1,8 @@
 "use client";
 
 import { useAllOrders } from "@/lib/firestore/orders/read";
-import { Button, CircularProgress } from "@nextui-org/react";
+import { useUser } from "@/lib/firestore/user/read";
+import { Avatar, Button, CircularProgress } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -121,13 +122,19 @@ function Row({ item, index }) {
     return acc + (curr.price_data.unit_amount / 100) * curr.quantity;
   }, 0);
 
+  const {data:user}=useUser({uid:item?.uid})
   return (
     <tr key={index} className="">
       <td className="border-y md:border-y-2 bg-gray-400 px-3 py-2 border-l rounded-l-lg text-center">
         {index + 1}
       </td>
       <td className="border-y md:border-y-2 bg-gray-400 px-3 py-2 text-left ">
-        {item?.uid}
+        <div className="flex gap-1 itcems-center">
+          <div className="flex flex-col">
+            <h1>{user?.displayName}</h1>
+            <h1 className="text-sm text-gray-600">{user?.email}</h1>
+          </div>
+        </div>
       </td>
 
       <td className="border-y md:border-y-2 bg-gray-400 px-3 py-1 md:py-2 whitespace-nowrap">
