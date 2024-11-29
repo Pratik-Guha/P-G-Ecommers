@@ -13,6 +13,7 @@ import CustomerReview from "./components/CustomerReview";
 import Brand from "./components/Brands";
 import { getBrands } from "@/lib/firestore/brands/read_server";
 import Footer from "./components/Footer";
+import Reviews from "./admin/reviews/page";
 
 
 
@@ -35,6 +36,7 @@ export default async function Home() {
       <ProductsGridView products={products}/>
       <CustomerReview />
       <Brand brands={brands} />
+      <Reviews />
       <Footer/>
    </main>
   );

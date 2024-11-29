@@ -3,6 +3,8 @@ import Photos from "./components/Photos";
 import Details from "./components/Details";
 import Reviews from "./components/Reviews";
 import RelatedProducts from "./components/RelatedProducts";
+import AddReview from "./components/AddReview";
+import AuthContextProvider from "@/contexts/AuthContext";
 
 export const metadata =  {
   title: "Products",
@@ -17,9 +19,14 @@ export default async function Page({ params }) {
       <Photos key={product?.id} imageList={[product?.featureImageURL ?? "", ...(product?.imageList ?? [])]} />
         <Details product={product} />
       </section>
-      <section>
-       <Reviews/>
-      </section>
+      <div className="flex justify-center py-10">
+        <div className="flex flex-col md:flex-row  gap-4 w-full md:max-w-[900px]">
+        <AuthContextProvider>
+        <AddReview productId={productId}/>
+        <Reviews productId={productId}/>
+        </AuthContextProvider>
+        </div>
+      </div>
       <RelatedProducts categoryId={product?.categoryId} />
     </main>
   );
