@@ -58,14 +58,14 @@ export function ProductCart({ product }) {
       <RatingAVG productId={product?.id} />
       </Suspense>
       {
-            product?.stock<=product?.orders && (
+            product?.stock<=(product?.orders ?? 0) && (
                 <div className="flex ">
                 <h3 className="text-red-500 bg-red-100 p-1 border border-red-500 rounded-lg font-semibold ">
                 Out of Stock
                 </h3>
             </div>
             )
-           }
+      }
       <div className="flex justify-between items-center gap-4 w-full">
         <div className="w-full">
         <Link href={`/checkout?type=buynow&productId=${product?.id}`} target="_blank">

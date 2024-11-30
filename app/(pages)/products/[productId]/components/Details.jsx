@@ -22,6 +22,15 @@ export default function Details({ product }) {
             ₹ {product?.salePrice}{" "}
             <span className="text-gray-400 text-sm  line-through">₹ {product?.price}</span>
             </h3>
+            {
+            product?.stock<=(product?.orders ?? 0) && (
+                <div className="flex ">
+                <h3 className="text-red-500 bg-red-100 p-1 border border-red-500 rounded-lg font-semibold ">
+                Out of Stock
+                </h3>
+            </div>
+            )
+           }
             <div className="flex gap-3 items-center flex-wrap">
                 <AuthContextProvider>
                 <Link href={`/checkout?type=buynow&productId=${product?.id}`} target="_blank">
