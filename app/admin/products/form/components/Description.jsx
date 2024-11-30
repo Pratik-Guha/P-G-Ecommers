@@ -1,38 +1,41 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
+import { useEffect, useRef } from "react";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+export default function Description({ data, handleData }) {
+  const editorRef = useRef(null);
 
-const modules = {
-  toolbar: {
-    container: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ size: ["extra-small", "small", "medium", "large"] }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link"],
-      [{ color: [] }, { background: [] }],
-      ["clean"],
-    ],
-  },
-};
-export default function Description({data,handleData}) {
+  useEffect(() => {
+    const quill = new Quill(editorRef.current, {
+      theme: "snow",
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, false] }],
+          ["bold", "italic", "underline", "strike"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["link", "image"],
+        ],
+      },
+    });
 
-    const handleChange=value=>{
-         handleData("description",value)
-    }
-    return (
-        <section className="bg-gray-400 rounded-xl flex-1 p-4 border-2 flex flex-col gap-3 h-full">
-            <h1 className="font-semibold">Description</h1>
-            <ReactQuill
-        value={data?.description}
-        onChange={handleChange}
-        modules={modules}
-        placeholder="Enter your description here..."
-      />
-        </section>
-    )
+    // Set initial content
+    quill.clipboard.dangerouslyPasteHTML(data?.description || "");
+
+    // Listen for content changes
+    quill.on("text-change", () => {
+      handleData("description", quill.root.innerHTML);
+    });
+  }, [data]);
+
+  return (
+    <section className="bg-gray-400 rounded-xl flex-1 p-4 border-2 flex flex-col gap-3 h-full">
+      <h1 className="font-semibold">Description</h1>
+      <div ref={editorRef} style={{ height: "300px" }} />
+    </section>
+  );
 }
 
+
+        // <section className="bg-gray-400 rounded-xl flex-1 p-4 border-2 flex flex-col gap-3 h-full">

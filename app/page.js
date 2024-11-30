@@ -36,7 +36,7 @@ export default async function Home() {
       <ProductsGridView products={products}/>
       <CustomerReview />
       <Brand brands={brands} />
-      <Reviews />
+      
       <Footer/>
    </main>
   );

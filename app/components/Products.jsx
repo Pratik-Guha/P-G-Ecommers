@@ -5,6 +5,8 @@ import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
 import AuthContextProvider from "@/contexts/AuthContext";
 import AddToCartButton from "./AddToCartButton";
+import { getProductReviewCount } from "@/lib/firestore/products/Count/read";
+import { Suspense } from "react";
 
 export default function ProductsGridView({ products }) {
   return (
@@ -52,33 +54,49 @@ export function ProductCart({ product }) {
       <p className="text-sm line-clamp-2 text-gray-400">
         {product?.shortDescription}
       </p>
-      <div className="flex  items-center gap-1">
-        <Rating
-          name="product-rating"
-          defaultValue={2.5}
-          precision={0.5}
-          size="small"
-          sx={{
-            "& .MuiRating-iconEmpty": {
-              color: "#ccc", // Set empty star color for dark mode
-            },
-          }}
-          readOnly
-        />{" "}
-        <h1 className="text-sm">(0)</h1>
-      </div>
-
+      <Suspense>
+      <RatingAVG productId={product?.id} />
+      </Suspense>
+      {
+            product?.stock<=product?.orders && (
+                <div className="flex ">
+                <h3 className="text-red-500 bg-red-100 p-1 border border-red-500 rounded-lg font-semibold ">
+                Out of Stock
+                </h3>
+            </div>
+            )
+           }
       <div className="flex justify-between items-center gap-4 w-full">
         <div className="w-full">
         <Link href={`/checkout?type=buynow&productId=${product?.id}`} target="_blank">
           <button className="hmbutton">BUY NOW</button>
         </Link>
         </div>
-
         <AuthContextProvider>
           <AddToCartButton productId={product?.id} />
         </AuthContextProvider>
       </div>
     </div>
   );
+}
+
+async function RatingAVG({ productId }) {
+  const counts=await getProductReviewCount({productId})
+  return (
+    <div className="flex  items-center gap-1">
+    <Rating
+      name="product-rating"
+      defaultValue={counts?.averageRating ?? 0}
+      precision={0.5}
+      size="small"
+      sx={{
+        "& .MuiRating-iconEmpty": {
+          color: "#ccc", // Set empty star color for dark mode
+        },
+      }}
+      readOnly
+    />{" "}
+    <h1 className="text-sm">{counts?.totalReviews ?? 0}</h1>
+  </div>
+  )
 }
