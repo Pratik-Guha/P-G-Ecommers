@@ -1,3 +1,4 @@
+import Countmeter from "./components/Countmeter";
 
 export const metadata = {
     title: "Admin",
@@ -5,8 +6,8 @@ export const metadata = {
   };
 export default function Admin(){
     return (
-        <main>
-            <h1>Admin</h1>
+        <main className="p-5">
+            <Countmeter/>
         </main>
     )
 }

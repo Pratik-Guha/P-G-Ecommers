@@ -45,4 +45,6 @@
     @apply  bg-slate-200 dark:bg-slate-300 dark:opacity-90 sm:p-6 p-3  flex flex-col-reverse 
     md:flex-row gap-6 w-full rounded-lg  h-full
 }
-
+.dashboardCard{
+    @apply px-4 py-2 gap-3 border-2 border-gray-400 rounded-xl flex justify-between w-full items-center
+}

@@ -36,6 +36,11 @@ const processOrder=async ({checkout})=>{
         const uid=checkout?.metadata?.uid;
         await adminDB.doc(`orders/${checkout?.id}`).set({ 
             checkout:checkout,
+            payment:{
+                amount :checkout?.line_items?.reduce((prev,acc)=>{
+                    return prev + acc?.price_data?.unit_amount * acc?.quantity
+                },0),
+            },
             uid:uid,
             id:checkout?.id,
             paymentMode:"cod",
