@@ -7,6 +7,7 @@ import AuthContextProvider from "@/contexts/AuthContext";
 import AddToCartButton from "./AddToCartButton";
 import { getProductReviewCount } from "@/lib/firestore/products/Count/read";
 import { Suspense } from "react";
+import Myrating from "./Myrating";
 
 export default function ProductsGridView({ products }) {
   return (
@@ -84,18 +85,7 @@ async function RatingAVG({ productId }) {
   const counts=await getProductReviewCount({productId})
   return (
     <div className="flex  items-center gap-1">
-    <Rating
-      name="product-rating"
-      defaultValue={counts?.averageRating ?? 0}
-      precision={0.5}
-      size="small"
-      sx={{
-        "& .MuiRating-iconEmpty": {
-          color: "#ccc", // Set empty star color for dark mode
-        },
-      }}
-      readOnly
-    />{" "}
+    <Myrating rating={counts}/>{" "}
     <h1 className="text-sm">{counts?.totalReviews ?? 0}</h1>
   </div>
   )

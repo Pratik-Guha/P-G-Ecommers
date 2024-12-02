@@ -1,5 +1,6 @@
 import AddToCartButton from "@/app/components/AddToCartButton"
 import FavoriteButton from "@/app/components/FavoriteButton"
+import Myrating from "@/app/components/Myrating"
 import AuthContextProvider from "@/contexts/AuthContext"
 import { getBrand } from "@/lib/firestore/brands/read_server"
 import { getCategory } from "@/lib/firestore/categories/read_server"
@@ -88,18 +89,8 @@ async function RatingAVG({ productId }) {
     const counts=await getProductReviewCount({productId})
     return (
       <div className="flex  items-center gap-1">
-      <Rating
-        name="product-rating"
-        defaultValue={counts?.averageRating ?? 0}
-        precision={0.5}
-        size="medium"
-        sx={{
-          "& .MuiRating-iconEmpty": {
-            color: "#ccc", // Set empty star color for dark mode
-          },
-        }}
-        readOnly
-      />{" "}
+        <Myrating rating={counts}/>
+      {" "}
       <h1 className="text-lg gap-1">
         {counts?.averageRating ?? 0} & 
         {counts?.totalReviews ?? 0} <span className="text-sm text-gray-400">Reviews</span>

@@ -13,7 +13,7 @@ export default function Countmeter() {
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Card title={"Products"} value={product??0} imgURL={"/products.jpg"} />
             <Card title={"Orders"} value={order?.totalOrders??0} imgURL={"/orders.jpg"} />
-            <Card title={"Revenues"} value={`₹ ${reveneu}`??0} imgURL={"/profit.jpg"} />
+            <Card title={"Revenues"} value={`₹ ${reveneu ?? 0}`} imgURL={"/profit.jpg"} />
             <Card title={"Customers"} value={users ?? 0} imgURL={"/customers.jpg"} />
         </section>
     )
