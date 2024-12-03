@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/contexts/AuthContext"
 import { useUser } from "@/lib/firestore/user/read"
-import { updateCarts, updateFavorites } from "@/lib/firestore/user/write"
+import { updateCarts } from "@/lib/firestore/user/write"
 import { Button } from "@nextui-org/react"
 import { useState } from "react"
 import toast from "react-hot-toast"

@@ -2,7 +2,7 @@
 
 
 import { useUsers } from "@/lib/firestore/user/read";
-import { Avatar, Button, CircularProgress } from "@nextui-org/react";
+import { Avatar,  CircularProgress } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 export default function CustomerView() {

@@ -1,11 +1,10 @@
 
-import { Heart, Search, ShoppingCart, UserCircle } from "lucide-react"
+import {  Search, UserCircle } from "lucide-react"
 import Link from "next/link"
 import LogoutButton from "./LogoutButton"
 import AuthContextProvider from "@/contexts/AuthContext"
 import HeaderClientButton from "./HeaderClientButton"
 import AdminButton from "./AdminButton"
-import HeaderMobile from "./HeaderMobile"
 
 
 export default function Header() {

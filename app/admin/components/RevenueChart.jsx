@@ -10,8 +10,8 @@ import {
   Title,
   Tooltip,
   Legend,
-  plugins,
-  scales,
+  
+  
 } from "chart.js";
 import { useEffect, useState } from "react";
 ChartJS.register(

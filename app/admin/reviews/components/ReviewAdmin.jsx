@@ -7,14 +7,13 @@ import { Rating } from "@mui/material";
 import { Avatar, Button, CircularProgress } from "@nextui-org/react";
 import { Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ReviewAdmin() {
   const { data: reviews } = useAllReviews();
   const [isLoading, setIsLoading] = useState(false);
- 
+  console.log(reviews)
   if (isLoading) {
     return (
       <div>

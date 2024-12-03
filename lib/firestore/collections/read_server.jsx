@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase"
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, } from "firebase/firestore"
 
 export const getCollections=async ({id})=>{
     const data=await getDoc(doc(

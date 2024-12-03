@@ -1,18 +1,14 @@
 "use client"
-import { useAuth } from '@/contexts/AuthContext'
 import { auth } from '@/lib/firebase'
-import { createUser } from '@/lib/firestore/user/write'
 import { Button } from '@nextui-org/react'
-import { createUserWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from 'firebase/auth'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function ForgetPassword() {
   
-  const {user}=useAuth()
-  const router=useRouter()
   const [isLoading,setIsLoading]=useState(false)
   const [data,setData]=useState({})
 
@@ -25,6 +21,9 @@ export default function ForgetPassword() {
   const handleSendEmail=async()=>{
     setIsLoading(true)
     try {
+     if(!data?.email){
+      throw new Error("Email is required")
+     }
      await sendPasswordResetEmail(auth,data?.email)
      toast.success("Password reset link sent to your email")
     } catch (error) {
@@ -38,7 +37,7 @@ export default function ForgetPassword() {
     <main className='login'>
       <section className='flex flex-col gap-3'>
       <Link href={'/'} className='flex justify-center'>
-        <img className='h-10' src="logo.png" alt="logo" />
+      <Image className='h-10' src="/logo.png" alt="logo" width={80} height={80} />
       </Link>
       <div className='loginform mid:min-w-[440px] w-full lg:min-w-[450px]'>
         <h1 className='font-bold text-xl'>Forgot Password</h1>

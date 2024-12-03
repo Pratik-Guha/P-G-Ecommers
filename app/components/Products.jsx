@@ -1,6 +1,3 @@
-import { Rating } from "@mui/material";
-import { Button } from "@nextui-org/react";
-import { Heart, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
 import AuthContextProvider from "@/contexts/AuthContext";

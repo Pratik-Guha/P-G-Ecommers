@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
 import { SearchIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,6 +25,7 @@ export default function SearchBox() {
         }}
         className="flex "
         >
+            
             <input 
             value={query}
             onChange={(e)=>setQuery(e.target.value)}

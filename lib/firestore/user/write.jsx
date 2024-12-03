@@ -1,6 +1,5 @@
 import { db } from "@/lib/firebase"
 import { doc, setDoc, Timestamp } from "firebase/firestore"
-import { displayName } from "react-quill"
 
 
 export const createUser=async ({uid,displayName,photoURL})=>{

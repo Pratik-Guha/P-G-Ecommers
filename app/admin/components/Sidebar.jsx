@@ -1,10 +1,8 @@
 "use clinet"
 
-import ThemeToggleButton from "@/app/toggle"
 import { auth } from "@/lib/firebase"
-import { Button } from "@nextui-org/react"
 import { signOut } from "firebase/auth"
-import { Box, Dices, icons, Layers3, LayoutDashboard, LogOut, Shapes, ShieldCheck, ShoppingCart, Star, UserRound } from "lucide-react"
+import { Box, Dices, Layers3, LayoutDashboard, LogOut, Shapes, ShieldCheck, ShoppingCart, Star, UserRound } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import toast from "react-hot-toast"
