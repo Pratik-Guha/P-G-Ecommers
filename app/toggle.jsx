@@ -30,7 +30,7 @@ const ThemeToggleButton = () => {
 
   return (
     <button 
-    className='fixed z-50 w-10 h-10 lg:left-72 left-52 md:top-4  top-2  bg-neutral-800 dark:bg-white rounded-full '
+    className='fixed z-50 w-10 h-10 lg:left-72 left-32 md:top-4  top-2  bg-neutral-800 dark:bg-white rounded-full '
     onClick={toggleDarkMode}
     >
      {

@@ -11,18 +11,27 @@ export default function HeaderClientButton() {
     return (
         <div className="flex gap-2 md:gap-4 items-center">
         <Link href={"/favorites"} target="_blank">
-        <Badge content={data?.favorites?.length ?? 0} color="danger">
+        {(data?.favorites?.length ?? 0)!==0  && <Badge content={data?.favorites?.length ?? 0} color="danger">
         <button title="favorites" className="h-6 w-6 flex justify-center items-center rounded-full hover:opacity-60">
           <Heart color="#f43f5e"  size={20}/>
         </button >
-        </Badge>
+        </Badge>}
+        {(data?.favorites?.length ?? 0)===0 &&
+          <button title="favorites" className="h-6 w-6 flex justify-center items-center rounded-full hover:opacity-60">
+          <Heart color="#f43f5e"  size={20}/>
+        </button >
+        }
         </Link>
         <Link href={"/cart"} target="_blank">
-        <Badge content={data?.carts?.length ?? 0} color="danger">
+        { (data?.carts?.length ?? 0)!==0 &&<Badge content={data?.carts?.length ?? 0} color="danger">
         <button title="my cart" className="h-6 w-6 flex justify-center items-center rounded-full hover:opacity-60">
           <ShoppingCart size={20}/>
         </button>
-        </Badge>
+        </Badge>}{
+          (data?.carts?.length ?? 0)===0 &&<button title="my cart" className="h-6 w-6 flex justify-center items-center rounded-full hover:opacity-60">
+          <ShoppingCart size={20}/>
+        </button>
+        }
         </Link>
         </div>
     )

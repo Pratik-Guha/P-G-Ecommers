@@ -2,6 +2,20 @@ import { ProductCart } from "@/app/components/Products"
 import { getCollections } from "@/lib/firestore/collections/read_server"
 import { getProducts } from "@/lib/firestore/products/read_server"
 
+
+export async function generateMetadata({ params }) {
+    const {collectionId}=params
+    const collection=await getCollections({id:collectionId})
+  
+    return {
+      title: `${collection?.title} | Collections`,
+      description: collection?.subTitle ?? "",
+      openGraph: {
+        images: [collection?.imageURL],
+      },
+    };
+  }
+  
 export default async function Page({ params }) {
 
     const {collectionId}=params

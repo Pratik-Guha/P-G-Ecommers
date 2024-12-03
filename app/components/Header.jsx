@@ -1,9 +1,11 @@
+
 import { Heart, Search, ShoppingCart, UserCircle } from "lucide-react"
 import Link from "next/link"
 import LogoutButton from "./LogoutButton"
 import AuthContextProvider from "@/contexts/AuthContext"
 import HeaderClientButton from "./HeaderClientButton"
 import AdminButton from "./AdminButton"
+import HeaderMobile from "./HeaderMobile"
 
 
 export default function Header() {
@@ -12,22 +14,20 @@ export default function Header() {
             name:"Home",
             link:"/"
         },
-        {
-            name:"About",
-            link:"/about-us"
-        },
+     
         {
             name:"Contact Us",
             link:"/contact-us"
         },
     ]
+    
   return (
     <nav className="nav">
       <Link href={"/"}>
       <img className="md:h-10 h-7" src={"/logo.png"} alt="logo" />
       </Link>
       
-      <div className="hidden md:flex gap-3 items-center">
+      <div className="hidden  md:flex gap-3 items-center">
         {
           menuList.map(item=>{
             return (
@@ -41,7 +41,7 @@ export default function Header() {
         }
       </div>
       
-      <div className="flex gap-2 md:gap-4 items-center">
+      <div className="flex gap-3 sm:gap-5 md:gap-4 items-center">
         <AuthContextProvider>
           <AdminButton/>
         </AuthContextProvider>
@@ -62,9 +62,7 @@ export default function Header() {
         <LogoutButton/>
         </AuthContextProvider>
       </div>
-      {/* <Link href={"/login"}>
-      <button className="button">Login</button>
-      </Link> */}
+      {/* <HeaderMobile/> */}
     </nav>
   )
 }

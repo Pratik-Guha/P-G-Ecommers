@@ -2,6 +2,20 @@ import { ProductCart } from "@/app/components/Products"
 import { getCategory } from "@/lib/firestore/categories/read_server"
 import { getProductsByCategory } from "@/lib/firestore/products/read_server"
 
+
+export async function generateMetadata({ params }) {
+    const {categoryId}=params
+    const category=await getCategory({id:categoryId})
+  
+    return {
+      title: `${category?.name} | Category`,
+      description: category?.slug ?? "",
+      openGraph: {
+        images: [category?.imageURL],
+      },
+    };
+  }
+  
 export default async function Page({ params }) {
     const {categoryId}=params
     const products=await getProductsByCategory({categoryId:categoryId})
