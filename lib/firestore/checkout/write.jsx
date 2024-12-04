@@ -4,7 +4,7 @@ import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore"
 
 export const createCheckoutAndGetURL=async({uid,products,address})=>{
     const checkoutId=doc(collection(db,`ids`)).id;
-
+    const domain = process.env.NEXT_PUBLIC_DOMAIN.replace(/\/$/, "");
     const ref = doc(db, `users`, uid, `checkout_sessions`, checkoutId);
 
 
@@ -38,11 +38,12 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
             uid:uid,
             address:JSON.stringify(address),
         },
-        success_url:`${process.env.NEXT_PUBLIC_DOMAIN}/checkout-success?checkout_id=${checkoutId}`,
-        cancel_url:`${process.env.NEXT_PUBLIC_DOMAIN}/checkout-failed?checkout_id=${checkoutId}`,
+        
+        success_url:`${domain}/checkout-success?checkout_id=${checkoutId}`,
+        cancel_url:`${domain}/checkout-failed?checkout_id=${checkoutId}`,
     })
 
-    await new Promise(res=>setTimeout(res,3000));
+    await new Promise(res=>setTimeout(res,2000));
 
     const checkoutSession=await getDoc(ref)
 
@@ -59,13 +60,29 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
     if(url){
         return url
     }else{
-        await new Promise(res=>setTimeout(res,5000));
+        await new Promise(res=>setTimeout(res,3000));
         const checkoutSession=await getDoc(ref)
+        if (checkoutSession?.data()?.error?.message) {
+            throw new Error(checkoutSession?.data()?.error?.message);
+        }
         if(checkoutSession?.data()?.url){
             return checkoutSession?.data()?.url
-        }else{
-            throw new Error("Check out session not created")
         }
+        else{
+            await new Promise((res) => setTimeout(res, 5000));
+
+        const checkoutSession = await getDoc(ref);
+
+        if (checkoutSession?.data()?.error?.message) {
+            throw new Error(checkoutSession?.data()?.error?.message);
+        }
+
+        if (checkoutSession.data()?.url) {
+            return checkoutSession.data()?.url;
+        } else {
+            throw new Error("Something went wrong! Please Try Again");
+        }
+    }
     }
 }
 export const createCheckoutCODAndGetURL=async({uid,products,address})=>{
