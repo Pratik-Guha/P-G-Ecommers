@@ -39,8 +39,8 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
             address:JSON.stringify(address),
         },
         
-        success_url:`${domain}/checkout-success?checkout_id=${checkoutId}`,
-        cancel_url:`${domain}/checkout-failed?checkout_id=${checkoutId}`,
+        success_url:`${process.env.NEXT_PUBLIC_DOMAIN}/checkout-success?checkout_id=${checkoutId}`,
+        cancel_url:`${process.env.NEXT_PUBLIC_DOMAIN}/checkout-failed?checkout_id=${checkoutId}`,
     })
 
     await new Promise(res=>setTimeout(res,2000));
