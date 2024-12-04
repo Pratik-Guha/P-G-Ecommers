@@ -43,7 +43,7 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
         cancel_url:`${process.env.NEXT_PUBLIC_DOMAIN}/checkout-failed?checkout_id=${checkoutId}`,
     })
 
-    await new Promise(res=>setTimeout(res,2000));
+    await new Promise(res=>setTimeout(res,3000));
 
     const checkoutSession=await getDoc(ref)
 
@@ -60,29 +60,13 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
     if(url){
         return url
     }else{
-        await new Promise(res=>setTimeout(res,3000));
+        await new Promise(res=>setTimeout(res,5000));
         const checkoutSession=await getDoc(ref)
-        if (checkoutSession?.data()?.error?.message) {
-            throw new Error(checkoutSession?.data()?.error?.message);
-        }
         if(checkoutSession?.data()?.url){
             return checkoutSession?.data()?.url
+        }else{
+            throw new Error("Check out session not created")
         }
-        else{
-            await new Promise((res) => setTimeout(res, 5000));
-
-        const checkoutSession = await getDoc(ref);
-
-        if (checkoutSession?.data()?.error?.message) {
-            throw new Error(checkoutSession?.data()?.error?.message);
-        }
-
-        if (checkoutSession.data()?.url) {
-            return checkoutSession.data()?.url;
-        } else {
-            throw new Error("Something went wrong! Please Try Again");
-        }
-    }
     }
 }
 export const createCheckoutCODAndGetURL=async({uid,products,address})=>{
