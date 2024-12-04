@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { createCheckoutAndGetURL, createCheckoutCODAndGetURL } from "@/lib/firestore/checkout/write"
 import { Button } from "@nextui-org/react"
 import confetti from "canvas-confetti"
-import { CheckSquare, CheckSquare2, Square } from "lucide-react"
+import {  CheckSquare2, Square } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
@@ -54,9 +54,9 @@ export default function Check({productList}){
                     address:address
                 })
                 router.push(`/checkout-cod?checkout_id=${checkoutId}`)
+                toast.success("Your order has been placed successfully")
+                confetti()
             }
-            toast.success("Your order has been placed successfully")
-            confetti()
         } catch (error) {
             toast.error(error?.message)
         }

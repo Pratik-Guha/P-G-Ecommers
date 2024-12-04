@@ -18,6 +18,7 @@ export const createCheckoutAndGetURL=async({uid,products,address})=>{
                     name:item?.product?.title?? "",
                     images:[item?.product?.featureImageURL]?? "",
                     description:item?.product?.shortDescription ?? "",
+                
                     metadata:{
                         productId:item?.id
                     }
